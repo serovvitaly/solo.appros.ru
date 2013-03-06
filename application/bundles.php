@@ -36,7 +36,7 @@
 return array(
 
 	'docs' => array('handles' => 'docs'),
-    
+    //
     'twigview' => array(
         'location' => 'twigview',
         'autoloads' => array(
