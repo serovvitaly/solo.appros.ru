@@ -32,10 +32,7 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('base.layout', array('title' => 'Админка'));
-});
+Route::controller(Controller::detect());
 
 /*
 |--------------------------------------------------------------------------

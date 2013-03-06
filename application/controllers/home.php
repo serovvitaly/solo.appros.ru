@@ -30,9 +30,11 @@ class Home_Controller extends Base_Controller {
 	|
 	*/
 
+    protected $_layout = 'base.column3';
+    
 	public function action_index()
 	{
-		return View::make('home.index');
+		//
 	}
 
 }

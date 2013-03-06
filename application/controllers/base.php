@@ -13,5 +13,15 @@ class Base_Controller extends Controller {
 	{
 		return Response::error('404');
 	}
+    
+    public function layout()
+    {
+        if (starts_with($this->layout, 'name: '))
+        {
+            return View::of(substr($this->layout, 6));
+        }
+
+        return View::make($this->layout);
+    }
 
 }
