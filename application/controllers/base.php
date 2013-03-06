@@ -2,6 +2,8 @@
 
 class Base_Controller extends Controller {
 
+    public $layout = 'base.column1';
+    
 	/**
 	 * Catch-all method for requests that can't be matched.
 	 *

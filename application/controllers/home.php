@@ -30,7 +30,7 @@ class Home_Controller extends Base_Controller {
 	|
 	*/
 
-    protected $_layout = 'base.column3';
+    public $layout = 'base.column1';
     
 	public function action_index()
 	{
