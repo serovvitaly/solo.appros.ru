@@ -39,6 +39,10 @@ h1,h2,h3,h4{
     border: 2px solid rgba(209, 84, 0);
     border: 2px solid rgba(209, 84, 0, 0.8);
 }
+.modal form{
+    margin: 0;
+    padding: 0;
+}
 .modal-backdrop, .modal-backdrop.fade.in {
     opacity: 0.2;
     filter: alpha(opacity=20);

@@ -4,6 +4,9 @@
     padding-top: 10px;
 }
 .folder-container .folder, .folder-container .item{
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
     -webkit-touch-callout: none;
       -webkit-user-select: none;
        -khtml-user-select: none;
@@ -12,11 +15,9 @@
               user-select: none;
 }
 .folder-container .folder{
-    background-repeat: no-repeat;
-    background-position: center;
-    cursor: pointer;
+    
 }
-.folder-container .folder:hover{
+.folder-container .folder:hover, .folder-container .item:hover{
     border-color: #DDDDDD;
     background-color: #F7F7F7;
 }
@@ -40,4 +41,13 @@
     background-position: 10px 50%;
     padding-left: 36px;
     line-height: 32px;
+}
+
+
+.folder-container.big .item{
+    height: 82px;
+    width: 82px;
+    float: left;
+    font-size: 0;
+    background-image: url(../icons/addons_64.png);
 }

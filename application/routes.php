@@ -32,7 +32,20 @@
 |
 */
 
-Route::controller(Controller::detect());
+Route::any('ajax/(:any)/(:any?)', function($controller, $action = 'default')
+{
+    $controller_name = 'Ajax_' . ucfirst( strtolower($controller) ) . '_Controller';
+    
+    //$controller = new $controller_name;
+    
+    $uri = "ajax/{$controller}/{$action}";
+    
+    $route = new Route('GET', $uri, array());
+    
+    return $route->call();
+});
+
+//Route::controller(Controller::detect());
 
 /*
 |--------------------------------------------------------------------------
