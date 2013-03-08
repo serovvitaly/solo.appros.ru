@@ -4,7 +4,13 @@
 
     <div class="row">
       <div class="span9">{{ content }}</div>
-      <div class="span3">правая сторона</div>
+      <div class="span3">
+        <div class="side-container">
+        {% block side_content %}
+          {{ side_content|raw }}
+        {% endblock side_content %}
+        </div>
+      </div>
     </div>
 
 {% endblock layout %}

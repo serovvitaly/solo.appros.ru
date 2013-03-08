@@ -1,0 +1,43 @@
+
+.folder-container{
+    clear: both;
+    padding-top: 10px;
+}
+.folder-container .folder, .folder-container .item{
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+}
+.folder-container .folder{
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+.folder-container .folder:hover{
+    border-color: #DDDDDD;
+    background-color: #F7F7F7;
+}
+.folder-container.big .folder{
+    height: 82px;
+    width: 82px;
+    float: left;
+    font-size: 0;
+    background-image: url(../icons/folder/generic_64.png);
+}
+.folder-container.middle .folder{
+    height: 62px;
+    width: 62px;
+    float: left;
+    font-size: 0;
+    background-image: url(../icons/folder/generic_32.png);
+}
+.folder-container.list .folder{
+    height: 32px;
+    background-image: url(../icons/folder/generic_16.png);
+    background-position: 10px 50%;
+    padding-left: 36px;
+    line-height: 32px;
+}
