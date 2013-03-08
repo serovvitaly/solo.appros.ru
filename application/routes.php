@@ -32,7 +32,7 @@
 |
 */
 
-Route::any('ajax/(:any)/(:any?)', function($controller, $action = 'default')
+/*Route::any('ajax/(:any)/(:any?)', function($controller, $action = 'default')
 {
     $controller_name = 'Ajax_' . ucfirst( strtolower($controller) ) . '_Controller';
     
@@ -43,7 +43,9 @@ Route::any('ajax/(:any)/(:any?)', function($controller, $action = 'default')
     $route = new Route('GET', $uri, array());
     
     return $route->call();
-});
+});*/
+
+Route::any('ajax/(:any?)/(:any?)', 'ajax.(:1)@(:2)');
 
 Route::controller(Controller::detect());
 
