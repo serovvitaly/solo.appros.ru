@@ -45,7 +45,7 @@ Route::any('ajax/(:any)/(:any?)', function($controller, $action = 'default')
     return $route->call();
 });
 
-//Route::controller(Controller::detect());
+Route::controller(Controller::detect());
 
 /*
 |--------------------------------------------------------------------------

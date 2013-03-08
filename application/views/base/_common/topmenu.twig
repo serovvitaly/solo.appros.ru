@@ -9,10 +9,10 @@
       <a class="brand" href="/">soloAppros</a>
       <div class="nav-collapse collapse">
         <ul class="nav">
-          <li class="active"><a href="/">Home</a></li>
-          <li><a href="/projects">Проекты</a></li>
-          <li><a href="/stats">Статистика</a></li>
-          <li><a href="/settings">Настройки</a></li>
+          <li{% if curctr == 'home' %} class="active"{% endif %}><a href="/">Home</a></li>
+          <li{% if curctr == 'projects' %} class="active"{% endif %}><a href="/projects">Проекты</a></li>
+          <li{% if curctr == 'stats' %} class="active"{% endif %}><a href="/stats">Статистика</a></li>
+          <li{% if curctr == 'settings' %} class="active"{% endif %}><a href="/settings">Настройки</a></li>
         </ul>
       </div>
     </div>
