@@ -22,6 +22,8 @@
           
           if (!method) return false;
           
+          //method = method.replace('.', '/');
+          
           var cfg = $.extend({
               controller: 'ajax',
               type: 'POST', // "POST" or "GET"

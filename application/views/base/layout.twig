@@ -35,6 +35,10 @@
   <script>
   $(document).ready(function(){
       $('.folder-container div').tooltip({placement:'bottom'});
+      
+      $('.modal').on('hidden', function(){
+          $(this).find('input,textarea').val('');
+      });
   });
   </script>
 </body>

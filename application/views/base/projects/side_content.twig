@@ -1,7 +1,7 @@
 <div class="btn-group">
   <a href="#addProjectModal" role="button" class="btn btn-danger" data-toggle="modal" style="width: 142px">Создать проект</a>
   <a href="#addFolderModal" role="button" class="btn" data-toggle="modal" title="Создать папку"><i class="icon-folder-close"></i></a>
-  <button class="btn" title="Вид"><i class="icon-th"></i></button>
+  <button class="btn" title="Вид" onclick="loadFolders();"><i class="icon-th"></i></button>
 </div>
 
 <div class="folder-container big">
@@ -66,12 +66,24 @@ $(document).ready(function(){
     $('#addFolderModal form').ajaxForm({
         dataType:  'json',
         success: function(responseText, statusText, xhr, $form){
-            console.log(responseText);
+            if (!responseText.result) {
+                //
+            }
+            loadFolders();
+            $('#addFolderModal').modal('hide');
         }
     });
 });
 function saveFolder()
 {
     $('#addFolderModal form').submit();
+}
+function loadFolders()
+{
+    solo.api('folder/save',{},{
+        success: function(data){
+            console.log(data);
+        }
+    });
 }
 </script>

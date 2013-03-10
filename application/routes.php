@@ -45,9 +45,13 @@
     return $route->call();
 });*/
 
+//Route::get('admin', array('before' => 'auth', function() {}));
+
 Route::any('ajax/(:any?)/(:any?)', 'ajax.(:1)@(:2)');
 
+
 Route::controller(Controller::detect());
+
 
 /*
 |--------------------------------------------------------------------------
