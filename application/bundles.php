@@ -37,6 +37,15 @@ return array(
 
 	'docs' => array('handles' => 'docs'),
     
+    'parser' => array(
+        'location' => 'parser',
+        'autoloads' => array(
+            'map' => array(
+                'Parser\\Parser' => '(:bundle)/parser.php',
+            )
+        )
+    ),
+    
     'twigview' => array(
         'location' => 'twigview',
         'autoloads' => array(

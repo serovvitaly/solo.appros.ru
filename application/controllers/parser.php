@@ -1,11 +1,13 @@
 <?php
 
-class Parser_Controller extends Base_Controller
+class Parser_Controller extends Controller
 {
-    public $layout = 'base.column2_left';
-    
     public function action_index()
     {
-        $this->layout->content = file_get_contents('http://www.avito.ru/moskva/kvartiry/1-k_kvartira_50_m_143397127');
+        
+        $parser = new Parser\Parser;
+        
+        $parser->parse();
+        
     }
 }
