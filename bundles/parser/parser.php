@@ -2,6 +2,9 @@
 
 namespace Parser;
 
+include("classes/RollingCurl.class.php");
+include("classes/AngryCurl.class.php");
+
 class Parser
 {    
     protected $_patterns = array(
@@ -9,12 +12,71 @@ class Parser
     );
     
     
+    protected $_parser = NULL;
+    
     protected $_task = NULL;
     
     
     public function __construct()
     {
-        //
+        $this->_parser = new \AngryCurl(array('Parser', 'proxy_check_ready'));
+    }
+    
+    public static function proxy_check_ready($response, $info, $request)
+    {
+        
+        $_proxy_list = \ParserProxy::where('proxy', '=', $request->options['10004'])->get();
+        
+        if ($_proxy_list) {
+            foreach ($_proxy_list AS $_proxy) {
+                $_proxy->status = (int) $info['http_code'];
+                $_proxy->save();
+            }
+        }
+    }
+    
+    /**
+    * Проверяет список прокси серверов
+    * 
+    */
+    public function check_proxy_list()
+    {
+        $proxy_list = \ParserProxy::where('status', '!=', 200)->get();
+        
+        $this->_parser->init_console();
+        
+        if ($proxy_list) {
+            $this->_set_long_script();
+            
+            $_list = array();
+            
+            foreach ($proxy_list AS $proxy) {
+                $_list[$proxy->id] = trim($proxy->proxy);
+            }
+            
+            $this->_parser->load_proxy_list($_list);
+            
+            $this->_parser->filter_alive_proxy();
+        }
+    }
+    
+    public function foobar()
+    {
+        return;
+        
+        $handler = fopen(dirname(__FILE__) . '/source/proxy_list.txt', 'r');
+        
+        while( !feof($handler) ) {
+            $cont = fgets($handler, 1024);
+            
+            $proxy_list = new \ParserProxy;
+            
+            $proxy_list->proxy = $cont;
+            
+            $proxy_list->save();
+        }
+        
+        fclose($handler);
     }
     
     
@@ -23,66 +85,14 @@ class Parser
     * 
     */
     public function parse()
-    {  
-        /*$ts = new \ParserTask;
-        $ts->uri = 'http://www.avito.ru/moskva/kvartiry?p={{2-10}}&user=1&params=201_1059';
-        $ts->patterns = 'avito_item';
-        $ts->save();
-        return;*/
-        $tasks = $this->_tasks();
+    {        
+        $this->_parser->init_console();
         
-        foreach ($tasks AS $task) {
-            
-            $uris = $this->_prepend_uris($task->uri);
-            
-            $patterns = explode(',', $task->patterns);
-            
-            if (count($uris) > 0 AND count($patterns) > 0) {
-                foreach ($uris AS $uri) {
-                    
-                    $_task = \ParserTask::where('uri', '=', $uri)->first();
-                    
-                    if (!$_task) {
-                        $_task = new \ParserTask; 
-                    }
-                    
-                    $_task->uri      = $uri;
-                    $_task->patterns = 'avito_item';
-                    $_task->is_temp  = true;
-                    
-                    $_task->save();
-                
-                    $_average_time = 0;
-                    
-                    $count = 1;
-                    
-                    $_start_time = time();
-                                    
-                    $content = $this->_get_content( trim($uri) );
-                    
-                    foreach ($patterns AS $pattern) {
-                        
-                        $_handler = 'handler_' . $pattern;
-                        
-                        if (isset($this->_patterns[$pattern]) AND !empty($content) AND method_exists($this, $_handler)) {
-                            preg_match_all($this->_patterns[$pattern], $content, $result);
-                            
-                            if ($this->$_handler($result) === true) {
-                                $_task->delete();
-                            }
-                        }
-                        
-                    }
-                    
-                    $_stop_time = time();
-                    
-                    if ($_stop_time - $_start_time > $_average_time + 3) {
-                        return;
-                    }
-                }
-            }
-            
-        }
+        $this->_parser->load_proxy_list(dirname(__FILE__) . '/source/proxy_list.txt');
+        
+        $this->_parser->load_useragent_list(dirname(__FILE__) . '/source/useragent_list.txt');
+        
+        //$this->_parser->execute(50);
     }
     
     
@@ -150,6 +160,17 @@ class Parser
     protected function _tasks()
     {
         return \ParserTask::all();
+    }
+    
+    
+    /**
+    * Настраивает PHP на долгую и тяжелую работу
+    * 
+    */
+    protected function _set_long_script()
+    {
+        ini_set('max_execution_time',0);
+        ini_set('memory_limit', '128M');
     }
     
     
