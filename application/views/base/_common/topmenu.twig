@@ -9,14 +9,23 @@
       <a class="brand" href="/">Монитор Недвижимости 1.0</a>
       <div class="nav-collapse collapse">
         <ul class="nav tabs">
-          <li{% if curctr == 'home' %} class="active"{% endif %}><a href="/">Home</a></li>
+          <li{% if curctr == 'index' %} class="active"{% endif %}><a href="/index">Home</a></li>
           <li{% if curctr == 'projects' %} class="active"{% endif %}><a href="/projects">Проекты</a></li>
           <li{% if curctr == 'stats' %} class="active"{% endif %}><a href="/stats">Статистика</a></li>
           <li{% if curctr == 'settings' %} class="active"{% endif %}><a href="/settings">Настройки</a></li>
           <li{% if curctr == 'help' %} class="active"{% endif %}><a href="/help">Справка</a></li>
         </ul>
         <ul class="nav pull-right">
-          <li><a>serovvitaly@gmail.com</a></li>
+          <li class="divider-vertical"></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">serovvitaly@gmail.com <b class="caret"></b></a>
+            <ul class="dropdown-menu super-dropdown">
+              <li><a href="#">Профиль</a></li>
+              <li><a href="#">Тех. поддержка</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Выход</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>

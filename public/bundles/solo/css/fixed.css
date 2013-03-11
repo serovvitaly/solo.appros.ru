@@ -15,7 +15,7 @@ body > .navbar .brand {
 
 .top-small-panel{
     height: 50px;
-    background: #F04E00;
+    background: #f94d01;
     /*position: relative; */
     border-bottom: 1px solid #FFBA8C;
     -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -53,8 +53,12 @@ body > .navbar .brand {
 }
 
 .modal {
-    border: 2px solid rgba(209, 84, 0);
-    border: 2px solid rgba(209, 84, 0, 0.8);
+    border: 3px solid rgba(255, 102, 0);
+    border: 3px solid rgba(255, 102, 0, 1);
+}
+.modal .modal-header{
+    background: #201510 url(../img/modal-bg.png) repeat-x top;
+    color: #FFFFFF;
 }
 .modal form{
     margin: 0;
@@ -66,4 +70,21 @@ body > .navbar .brand {
 }
 .modal.fade.in {
     top: 13%;
+}
+
+.dropdown-menu.super-dropdown{
+    border: 2px solid #F94D01;
+    border: 2px solid rgba(249, 77, 1, 0.4);
+    
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+            border-radius: 3px;
+            
+       -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+          -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+               box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+               
+    -webkit-background-clip: padding-box;
+       -moz-background-clip: padding;
+            background-clip: padding-box;
 }

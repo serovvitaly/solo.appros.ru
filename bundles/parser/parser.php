@@ -41,7 +41,7 @@ class Parser
     */
     public function check_proxy_list()
     {
-        $proxy_list = \ParserProxy::where('status', '!=', 200)->get();
+        $proxy_list = \ParserProxy::where('status', '=', 0)->get();
         
         $this->_parser->init_console();
         
