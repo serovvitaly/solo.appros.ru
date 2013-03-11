@@ -51,3 +51,21 @@
     font-size: 0;
     background-image: url(../icons/addons_64.png);
 }
+
+.navbar-inverse .nav.tabs > li > a {
+    background-color: #808080;
+    color: white;
+    margin: 10px 3px 0 0;
+    padding: 5px 10px 5px;
+    -webkit-border-radius: 4px 4px 0 0;
+       -moz-border-radius: 4px 4px 0 0;
+            border-radius: 4px 4px 0 0;
+}
+.navbar-inverse .nav.tabs > li > a:focus, .navbar-inverse .nav.tabs > li > a:hover {
+    background-color: #808080;
+    color: white;
+}
+.navbar-inverse .nav.tabs .active > a, .navbar-inverse .nav.tabs .active > a:hover, .navbar-inverse .nav.tabs .active > a:focus {
+    background-color: #F04E00;
+    color: white;
+}

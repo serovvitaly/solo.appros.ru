@@ -34,11 +34,18 @@
   <script type="text/javascript" src="/bundles/solo/js/solo.js"></script>
   <script>
   $(document).ready(function(){
+      
+      $('.side-container').height( $(window).height() - 111 );
+      
       $('.folder-container div').tooltip({placement:'bottom'});
       
       $('.modal').on('hidden', function(){
           $(this).find('input,textarea').val('');
       });
+  });
+  
+  $(window).resize(function(){
+      $('.side-container').height( $(window).height() - 111 );
   });
   </script>
 </body>

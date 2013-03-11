@@ -6,6 +6,13 @@ h1,h2,h3,h4{
     font-weight: normal;
 }
 
+body > .navbar .brand {
+    float: left;
+    margin-left: 0px;  
+    margin-right: 10px;
+    background: none;
+}
+
 .top-small-panel{
     height: 50px;
     background: #F04E00;
