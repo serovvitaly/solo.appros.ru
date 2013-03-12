@@ -102,7 +102,7 @@ class Parser
         $this->_parser->get('http://www.avito.ru/moskva/kvartiry?p=3&user=1&params=201_1059');
         $this->_parser->get('http://www.avito.ru/moskva/kvartiry?user=1&view=list');
         
-        $this->_parser->execute(50);
+        //$this->_parser->execute(50);
     }
     
     
