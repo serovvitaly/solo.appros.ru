@@ -19,7 +19,7 @@ class Parser
     
     public function __construct()
     {
-        $this->_parser = new \AngryCurl(array('Parser', 'proxy_check_ready'));
+        $this->_parser = new \AngryCurl(array('Parser\Parser', 'response_handler'));
     }
     
     public static function proxy_check_ready($response, $info, $request)
@@ -33,6 +33,11 @@ class Parser
                 $_proxy->save();
             }
         }
+    }
+    
+    public static function response_handler($response, $info, $request)
+    {
+        echo $response;
     }
     
     /**
@@ -86,13 +91,18 @@ class Parser
     */
     public function parse()
     {        
-        $this->_parser->init_console();
+        //$this->_parser->init_console();
         
-        $this->_parser->load_proxy_list(dirname(__FILE__) . '/source/proxy_list.txt');
+        $proxy_list = \ParserProxy::get_proxy_list();
+        
+        $this->_parser->load_proxy_list($proxy_list);
         
         $this->_parser->load_useragent_list(dirname(__FILE__) . '/source/useragent_list.txt');
         
-        //$this->_parser->execute(50);
+        $this->_parser->get('http://www.avito.ru/moskva/kvartiry?p=3&user=1&params=201_1059');
+        $this->_parser->get('http://www.avito.ru/moskva/kvartiry?user=1&view=list');
+        
+        $this->_parser->execute(50);
     }
     
     

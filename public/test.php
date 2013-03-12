@@ -1,8 +1,7 @@
 <?php
 header('Content-Type: text/plain');
 
-$str = 123.56;
-
-var_dump($str);
-
-var_dump((array)$str);
+echo json_encode(array(
+    'http://www.avito.ru/moskva/kvartiry?user=1&params=201_1059&view=list',
+    'http://www.avito.ru/moskva/kvartiry?user=1&params=201_1058&view=list',
+));

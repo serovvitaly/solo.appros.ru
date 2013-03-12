@@ -258,7 +258,7 @@ class RollingCurl {
      * @param int $window_size Max number of simultaneous connections
      * @return bool
      */
-    private function rolling_curl($window_size = null) {
+    private function rolling_curl($window_size = 5) {
         if ($window_size) {
             $this->window_size = $window_size;
         }
