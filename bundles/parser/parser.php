@@ -169,7 +169,7 @@ class Parser
     */
     protected function _tasks()
     {
-        return \ParserTask::all();
+        //return \ParserTask::all();
     }
     
     
