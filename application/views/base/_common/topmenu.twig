@@ -9,7 +9,8 @@
       <a class="brand" href="/">Монитор Недвижимости 1.0</a>
       <div class="nav-collapse collapse">
         <ul class="nav tabs">
-          <li{% if curctr == 'index' %} class="active"{% endif %}><a href="/index">Home</a></li>
+          <li{% if curctr == 'home' %} class="active"{% endif %}><a href="/"><i class="icon-home icon-white"></i></a></li>
+          <li{% if curctr == 'map' %} class="active"{% endif %}><a href="/map">Карта</a></li>
           <li{% if curctr == 'projects' %} class="active"{% endif %}><a href="/projects">Проекты</a></li>
           <li{% if curctr == 'stats' %} class="active"{% endif %}><a href="/stats">Статистика</a></li>
           <li{% if curctr == 'settings' %} class="active"{% endif %}><a href="/settings">Настройки</a></li>
