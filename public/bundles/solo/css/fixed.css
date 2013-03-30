@@ -16,7 +16,7 @@ body > .navbar .brand {
 .top-small-panel{
     height: 50px;
     background: #f94d01;
-    /*position: relative; */
+    position: fixed;
     border-bottom: 1px solid #FFBA8C;
     -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
        -moz-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
