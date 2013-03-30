@@ -15,7 +15,7 @@ class Bulletin_Controller extends Base_Controller {
 
     public function action_index()
     {
-        $items = Advert::limit(20)->get();
+        $items = Advert::take(20)->get();
         
         $this->layout->content = View::make('base.bulletin.content', array('items' => $items));
         
