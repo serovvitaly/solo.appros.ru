@@ -3,8 +3,7 @@
     <tr>
       <th>#</th>
       <th>Заголовок</th>
-      <th>Метро</th>
-      <th>Цена</th>
+
     </tr>
   </thead>
   <tbody>
@@ -12,8 +11,7 @@
     <tr id="item-{{ item.uid }}">
       <td>{{ item.uid }}</td>
       <td>{{ item.atitle }}</td>
-      <td>{{ item.metro|raw }}</td>
-      <td>{{ item.price }}</td>
+
     </tr>
   {% endfor %}
   </tbody>
