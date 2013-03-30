@@ -15,7 +15,7 @@ class Bulletin_Controller extends Base_Controller {
 
     public function action_index()
     {
-        $items = Advert::where('status', '=', 3)->take(20)->get()->to_array();
+        $items = Advert::where('status', '=', 3)->take(20)->get();
         
         $this->layout->content = View::make('base.bulletin.content', array('items' => $items));
         
