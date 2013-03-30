@@ -8,4 +8,9 @@ class Advert extends Eloquent
     {
         return $this->metro;
     }
+    
+    public function price()
+    {
+        return $this->metro;
+    }
 }
