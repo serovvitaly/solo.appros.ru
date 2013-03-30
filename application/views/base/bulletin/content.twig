@@ -3,6 +3,7 @@
     <tr>
       <th>#</th>
       <th>Заголовок</th>
+      <th>Метро</th>
       <th>Цена</th>
     </tr>
   </thead>
@@ -10,7 +11,8 @@
   {% for item in items %}
     <tr id="item-{{ item.uid }}">
       <td>{{ item.uid }}</td>
-      <td>{{ item.title }}</td>
+      <td>{{ item.atitle }}</td>
+      <td>{{ item.metro }}</td>
       <td>{{ item.price }}</td>
     </tr>
   {% endfor %}
