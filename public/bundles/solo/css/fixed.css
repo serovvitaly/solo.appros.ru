@@ -59,8 +59,9 @@ body > .navbar .brand {
     border: 3px solid rgba(255, 102, 0, 1);
 }
 .modal .modal-header{
-    background: #201510 url(../img/modal-bg.png) repeat-x top;
-    color: #FFFFFF;
+    background: #DFD3CB;
+    color: #000000;
+    border-bottom: 1px solid #C09E88;
 }
 .modal form{
     margin: 0;
