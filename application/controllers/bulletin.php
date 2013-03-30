@@ -17,6 +17,8 @@ class Bulletin_Controller extends Base_Controller {
     {
         $items = Advert::where('status', '=', 3)->take(20)->get();
         
+        echo count($items);
+        
         $this->layout->content = View::make('base.bulletin.content', array('items' => $items));
         
     }
