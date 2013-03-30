@@ -2,5 +2,5 @@
 
 class Advert extends Eloquent
 {
-    public $table = 'spider_avito_store1';
+    public static $table = 'spider_avito_store1';
 }
