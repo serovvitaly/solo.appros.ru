@@ -84,7 +84,7 @@ return array(
 			'username' => 'appros',
 			'password' => '123456',
 			'charset'  => 'utf8',
-			'prefix'   => 'solo_',
+			'prefix'   => '',
 			'schema'   => 'public',
 		),
 
