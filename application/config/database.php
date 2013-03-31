@@ -79,7 +79,8 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => '127.0.0.1',
+			'host'     => '62.109.8.132',
+            'port'     => 5432,
 			'database' => 'appros',
 			'username' => 'appros',
 			'password' => '123456',

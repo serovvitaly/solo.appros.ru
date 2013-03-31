@@ -9,26 +9,24 @@
     <button class="btn">2-к</button>
     <button class="btn">3-к</button>
     <button class="btn">4-к</button>
+    <button class="btn">5-к</button>
+    <button class="btn">> 5</button>
   </div>
 </div>
 
 
 <table id="main-table" class="table table-bordered table-hover table-striped">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Заголовок</th>
-      <th>Метро</th>
-      <th>Цена</th>
-    </tr>
-  </thead>
   <tbody>
   {% for item in items %}
     <tr id="item-{{ item.uid }}">
-      <td>{{ item.uid }}</td>
-      <td>{{ item.atitle }}</td>
-      <td>{{ item.metro|raw }}</td>
-      <td>{{ item.price }}</td>
+      <td>
+        <div>
+          {{ item.time_added }} <strong>{{ item.atitle }}</strong>
+        </div>
+        <div>
+           Метро: {{ item.metro|raw }} Цена: {{ item.price }}
+        </div>
+      </td>
     </tr>
   {% endfor %}
   </tbody>
