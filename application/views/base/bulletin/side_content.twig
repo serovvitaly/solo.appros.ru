@@ -20,6 +20,7 @@
 }
 </style>
 
+<div class="flier">
 <div>
   <img alt="" src="http://97.img.avito.st/640x480/293592097.jpg">
 </div>
@@ -53,9 +54,16 @@
 
 <div id="map" style="width:100%; height:300px;"></div>
 
+</div>
+
 <script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU"></script>
 <script>
 $(document).ready(function(){
+    
+    $('.flier').hcSticky({
+        top: 150,
+        bottomEnd: 100
+    });
     
     $('.imso').on('click', function(){
         $('.imso').removeClass('active');
