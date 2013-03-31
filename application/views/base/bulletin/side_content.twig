@@ -1,8 +1,67 @@
+<style>
+.imso{
+    width: 78px;
+    height: 59px;
+    float: left;
+    opacity: 0.8;
+}
+.imso:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+.imso.active{
+    opacity: 1;
+    border: 2px solid red;
+    width: 74px;
+    height: 55px;
+}
+.gray{
+    color: #808080;
+}
+</style>
 
-Карта
+<div>
+  <img alt="" src="http://97.img.avito.st/640x480/293592097.jpg">
+</div>
+<div style="margin-top: 5px;">
+  <img class="imso active" src="http://97.img.avito.st/640x480/293592097.jpg" alt="">
+  <img class="imso" src="http://97.img.avito.st/640x480/293592097.jpg" alt="">
+  <img class="imso" src="http://97.img.avito.st/640x480/293592097.jpg" alt="">
+  <img class="imso" src="http://97.img.avito.st/640x480/293592097.jpg" alt="">
+  <img class="imso" src="http://97.img.avito.st/640x480/293592097.jpg" alt="">
+  <img class="imso" src="http://97.img.avito.st/640x480/293592097.jpg" alt="">
+  <img class="imso" src="http://97.img.avito.st/640x480/293592097.jpg" alt="">
+  <img class="imso" src="http://97.img.avito.st/640x480/293592097.jpg" alt="">
+  <div style="clear: both;"></div>
+</div>
+<div style="margin-top: 20px;">
+  <strong style="font-size: 16px;">5-к квартира, 100 м², 1/12 эт. в Москве</strong>
+  
+  <table style="margin: 5px 0 20px;">
+    <tbody>
+      <tr><td class="gray">Продавиц:</td><td>Иван</td></tr>
+      <tr><td class="gray">Телефон:</td><td>89345567890</td></tr>
+      <tr><td class="gray">Объявление:</td><td><a href="#" target="_blank">http://avito.ru</a></td></tr>
+    </tbody>
+  </table>
+  
+  <p>
+  Продам 1 комнатную квартиру общей площадью 35 кв.метров на 3-ем этаже 14-ти этажного многоквартирного панельного дома в 5-ти минутах ходьбы от ст.метро "Тульская", напротив ТЦ "Ереван Плаза". Развитая инфраструктура у дома, охраняемый подъезд с консьержем, два лифта(грузовой и пассажирский), коридорная дверь с кодовым замком. Квартира в отличном состоянии, евроремонт-чистая, светлая, уютная-полностью готова для проживания. Входная дверь металлическая, окна-стеклопакеты. Современная мебель, телевизор, кондиционер, стиральная машина, холодильник, микроволновая печь, встроенный кухонный гарнитур с варочной панелью и духовым шкафом, сантехника в идеальном состоянии. Все входит в стоимость. Наличие телефона, интернета. Прямая продажа от собственника!
+  </p>
+  
+</div>
 
+<div id="map" style="width:100%; height:300px;"></div>
+
+<script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU"></script>
 <script>
 $(document).ready(function(){
+    
+    $('.imso').on('click', function(){
+        $('.imso').removeClass('active');
+        $(this).addClass('active');
+    });
+    
     $('#addFolderModal form').ajaxForm({
         dataType:  'json',
         success: function(responseText, statusText, xhr, $form){
@@ -13,17 +72,30 @@ $(document).ready(function(){
             $('#addFolderModal').modal('hide');
         }
     });
+    
+    loadTable();
 });
 function saveFolder()
 {
     $('#addFolderModal form').submit();
 }
-function loadFolders()
+function loadTable(filter)
 {
-    solo.api('folder/save',{},{
+    if (!filter) filter = {};
+    
+    solo.api('bulletin/get',{
+        //filter: filter
+    },{
         success: function(data){
             console.log(data);
         }
     });
 }
+
+ymaps.ready(function(){
+    var myMap = new ymaps.Map('map', {
+        center: [55.76, 37.64], // Москва
+        zoom: 10
+    });
+});
 </script>

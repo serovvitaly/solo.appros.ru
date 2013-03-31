@@ -4,7 +4,7 @@ class Bulletin_Controller extends Base_Controller {
     
     public $title = 'Проекты';
     
-    public $layout = 'base.column_6x3';
+    public $layout = 'base.column_7x5';
     
     public function before()
     {
