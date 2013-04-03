@@ -41,6 +41,7 @@ body > .navbar .brand {
     border-color: #FCFCFC;
     height: 685px;
     padding: 10px;
+    margin-top: -50px;
     -webkit-box-shadow: 0 0px 10px rgba(0, 0, 0, 0.4);
        -moz-box-shadow: 0 0px 10px rgba(0, 0, 0, 0.4);
             box-shadow: 0 0px 10px rgba(0, 0, 0, 0.4);
