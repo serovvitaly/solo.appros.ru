@@ -1,32 +1,20 @@
 <?php
 
 abstract class Ajax_Controller extends Controller
-{
-    protected $success = true;
+{    
+    protected $_output  = array(); 
     
-    protected $result  = NULL;
+
     
-    protected $errors  = array();
-    
-    protected function _set_error()
+    public function __set($name, $value)
     {
-        //
+        $this->_output[$name] = $value;
     }
     
-    protected function _output()
-    {
-        $output = array(
-            'success' => $this->success,
-            'result'  => $this->result,
-            'errors'  => $this->errors
-        );
-        
-        return $output;
-    }
     
     public function after($response)
     {
-        echo Response::json( $this->_output() );
+        echo Response::json( $this->_output );
     }
     
 }
