@@ -13,9 +13,9 @@ class Ajax_Announcements_Controller extends Ajax_Controller
         
         $filter = Input::get('filter', NULL);
         
-        $totla = Advert::count();
+        $totla = Advert::where('status', '=', 3)->count();
         
-        $data  = Advert::take($limit)->skip($start)->order_by('time_added', 'desc')->get();
+        $data  = Advert::where('status', '=', 3)->take($limit)->skip($start)->order_by('time_added', 'desc')->get();
         
         $rows = array();
         if (count($data) > 0) {
@@ -27,6 +27,7 @@ class Ajax_Announcements_Controller extends Ajax_Controller
                     'price' => $row->price,
                     'link'  => 'http://avito.ru' . $row->ahref,
                     'description'  => $row->description,
+                    'type'  => $row->type,
                 );
             }
         }

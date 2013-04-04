@@ -42,13 +42,17 @@ Ext.define('MyApp.store.Announcements', {
                     name: 'date'
                 },
                 {
-                    name: 'price'
+                    name: 'price',
+                    type: 'float'
                 },
                 {
                     name: 'description'
                 },
                 {
                     name: 'link'
+                },
+                {
+                    name: 'type'
                 }
             ]
         }, cfg)]);

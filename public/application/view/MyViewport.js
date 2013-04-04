@@ -206,14 +206,61 @@ Ext.define('MyApp.view.MyViewport', {
                                     columns: [
                                         {
                                             xtype: 'gridcolumn',
+                                            align: 'right',
                                             dataIndex: 'id',
                                             text: 'ИД'
                                         },
                                         {
                                             xtype: 'gridcolumn',
+                                            renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+                                                return '<strong>'+value+'</strong>';
+                                            },
                                             dataIndex: 'title',
                                             text: 'Заголовок',
                                             flex: 1
+                                        },
+                                        {
+                                            xtype: 'gridcolumn',
+                                            renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+                                                var els = value.split('.');
+
+                                                var cpmns = {
+                                                    k1: '1-а',
+                                                    k2: '2-х',
+                                                    k3: '3-х',
+                                                    k4: '4-х',
+                                                    k5: '5-и',
+                                                    kb5: '>5-и'
+                                                };
+
+                                                return cpmns[els[2]];
+                                            },
+                                            width: 60,
+                                            align: 'right',
+                                            dataIndex: 'type',
+                                            text: 'Комнат'
+                                        },
+                                        {
+                                            xtype: 'gridcolumn',
+                                            renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+                                                var els = value.split('.');
+
+
+                                                var types = {
+                                                    sale: 'продажа',
+                                                    purchase: 'купля'
+                                                };
+
+                                                var colors = {
+                                                    sale: '#07A75A',
+                                                    purchase: '#0085FF'
+                                                };
+
+                                                return '<span style="color:' + colors[els[1]] + '">' + types[els[1]] + '</span>';
+                                            },
+                                            width: 80,
+                                            dataIndex: 'type',
+                                            text: 'Тип сделки'
                                         },
                                         {
                                             xtype: 'datecolumn',
@@ -224,6 +271,7 @@ Ext.define('MyApp.view.MyViewport', {
                                         },
                                         {
                                             xtype: 'numbercolumn',
+                                            align: 'right',
                                             dataIndex: 'price',
                                             text: 'Цена'
                                         }
@@ -270,6 +318,7 @@ Ext.define('MyApp.view.MyViewport', {
                                         '<div>',
                                         '    <strong>{title}</strong>',
                                         '    <p><a target="_balnk" href="{link}">Источник</a></p>',
+                                        '    <p>Цена: {price}</p>',
                                         '    <p>{description}</p>',
                                         '</div>'
                                     ],
