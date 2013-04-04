@@ -53,6 +53,15 @@ Ext.define('MyApp.store.Announcements', {
                 },
                 {
                     name: 'type'
+                },
+                {
+                    name: 'metro'
+                },
+                {
+                    name: 'address'
+                },
+                {
+                    name: 'imgs'
                 }
             ]
         }, cfg)]);

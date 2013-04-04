@@ -37,6 +37,7 @@ Ext.define('MyApp.view.MyViewport', {
                     xtype: 'panel',
                     region: 'west',
                     split: true,
+                    splitterResize: false,
                     border: false,
                     maxWidth: 350,
                     minWidth: 200,
@@ -55,32 +56,6 @@ Ext.define('MyApp.view.MyViewport', {
                             title: 'Параметры фильтрации',
                             dockedItems: [
                                 {
-                                    xtype: 'panel',
-                                    dock: 'bottom',
-                                    hidden: true,
-                                    padding: '',
-                                    layout: {
-                                        type: 'column'
-                                    },
-                                    bodyPadding: 5,
-                                    title: '',
-                                    items: [
-                                        {
-                                            xtype: 'textfield',
-                                            fieldLabel: '',
-                                            emptyText: 'Имя фильтра'
-                                        },
-                                        {
-                                            xtype: 'button',
-                                            text: 'Сохранить'
-                                        },
-                                        {
-                                            xtype: 'button',
-                                            text: 'Отменить'
-                                        }
-                                    ]
-                                },
-                                {
                                     xtype: 'toolbar',
                                     dock: 'bottom',
                                     items: [
@@ -98,6 +73,39 @@ Ext.define('MyApp.view.MyViewport', {
                                                 alert('click saver');
                                             },
                                             text: 'Сохранить фильтр'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'panel',
+                                    dock: 'bottom',
+                                    padding: '',
+                                    layout: {
+                                        type: 'column'
+                                    },
+                                    bodyPadding: 5,
+                                    title: '',
+                                    items: [
+                                        {
+                                            xtype: 'textfield',
+                                            width: 235,
+                                            fieldLabel: '',
+                                            emptyText: 'Имя фильтра'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            margin: '0 3 0 3',
+                                            icon: '/bundles/solo/icons/accept.png',
+                                            text: '',
+                                            tooltip: 'Сохранить',
+                                            tooltipType: 'title'
+                                        },
+                                        {
+                                            xtype: 'button',
+                                            icon: '/bundles/solo/icons/cancel.png',
+                                            text: '',
+                                            tooltip: 'Отмена',
+                                            tooltipType: 'title'
                                         }
                                     ]
                                 }
@@ -167,6 +175,128 @@ Ext.define('MyApp.view.MyViewport', {
                                             boxLabel: '>5'
                                         }
                                     ]
+                                },
+                                {
+                                    xtype: 'fieldset',
+                                    title: 'Цены, руб.',
+                                    items: [
+                                        {
+                                            xtype: 'fieldcontainer',
+                                            layout: {
+                                                type: 'column'
+                                            },
+                                            fieldLabel: '',
+                                            items: [
+                                                {
+                                                    xtype: 'numberfield',
+                                                    columnWidth: 0.5,
+                                                    id: 'PriceOt',
+                                                    margin: '0 3 0 0',
+                                                    fieldLabel: 'от',
+                                                    labelWidth: 16
+                                                },
+                                                {
+                                                    xtype: 'numberfield',
+                                                    columnWidth: 0.5,
+                                                    id: 'PriceDo',
+                                                    margin: '0 0 0 3',
+                                                    fieldLabel: 'до',
+                                                    labelWidth: 16
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'multislider',
+                                            anchor: '100%',
+                                            fieldLabel: '',
+                                            maxValue: 100000000,
+                                            useTips: false,
+                                            values: [
+                                                1000000,
+                                                50000000
+                                            ],
+                                            listeners: {
+                                                change: {
+                                                    fn: me.onMultisliderChange,
+                                                    scope: me
+                                                }
+                                            }
+                                        },
+                                        {
+                                            xtype: 'checkboxfield',
+                                            anchor: '100%',
+                                            fieldLabel: '',
+                                            boxLabel: 'показывать объявления без цены',
+                                            checked: true
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'fieldset',
+                                    title: 'Период публикации',
+                                    items: [
+                                        {
+                                            xtype: 'fieldcontainer',
+                                            layout: {
+                                                type: 'column'
+                                            },
+                                            fieldLabel: '',
+                                            items: [
+                                                {
+                                                    xtype: 'datefield',
+                                                    columnWidth: 0.5,
+                                                    margin: '0 3 0 0',
+                                                    fieldLabel: 'с',
+                                                    labelWidth: 16,
+                                                    format: 'd.m.Y'
+                                                },
+                                                {
+                                                    xtype: 'datefield',
+                                                    columnWidth: 0.5,
+                                                    margin: '0 0 0 3',
+                                                    fieldLabel: 'по',
+                                                    labelWidth: 16,
+                                                    format: 'd.m.Y'
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'checkboxfield',
+                                            anchor: '100%',
+                                            fieldLabel: '',
+                                            boxLabel: 'показывать только за текущие сутки'
+                                        },
+                                        {
+                                            xtype: 'fieldcontainer',
+                                            layout: {
+                                                type: 'column'
+                                            },
+                                            fieldLabel: 'за последние',
+                                            labelWidth: 85,
+                                            items: [
+                                                {
+                                                    xtype: 'numberfield',
+                                                    width: 49,
+                                                    fieldLabel: ''
+                                                },
+                                                {
+                                                    xtype: 'label',
+                                                    padding: '7 5 0 5',
+                                                    text: 'дн.'
+                                                },
+                                                {
+                                                    xtype: 'numberfield',
+                                                    width: 50,
+                                                    fieldLabel: ''
+                                                },
+                                                {
+                                                    xtype: 'label',
+                                                    padding: '7 0 0 5',
+                                                    text: 'час.'
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 }
                             ]
                         },
@@ -174,7 +304,22 @@ Ext.define('MyApp.view.MyViewport', {
                             xtype: 'panel',
                             region: 'center',
                             margin: '1 0 0',
-                            title: 'Список фильтров'
+                            layout: {
+                                type: 'fit'
+                            },
+                            title: 'Список фильтров',
+                            items: [
+                                {
+                                    xtype: 'treepanel',
+                                    border: false,
+                                    autoScroll: true,
+                                    title: '',
+                                    store: 'FiltersStore',
+                                    viewConfig: {
+                                        rootVisible: false
+                                    }
+                                }
+                            ]
                         }
                     ]
                 },
@@ -209,6 +354,18 @@ Ext.define('MyApp.view.MyViewport', {
                                             align: 'right',
                                             dataIndex: 'id',
                                             text: 'ИД'
+                                        },
+                                        {
+                                            xtype: 'gridcolumn',
+                                            renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+                                                if (value && value.length > 0) {
+                                                    return '<img style="margin-bottom: -5px;" src="/bundles/solo/icons/camera.png" alt="+">';   
+                                                } else return '';
+                                            },
+                                            width: 47,
+                                            align: 'center',
+                                            dataIndex: 'imgs',
+                                            text: 'Фото'
                                         },
                                         {
                                             xtype: 'gridcolumn',
@@ -318,7 +475,9 @@ Ext.define('MyApp.view.MyViewport', {
                                         '<div>',
                                         '    <strong>{title}</strong>',
                                         '    <p><a target="_balnk" href="{link}">Источник</a></p>',
-                                        '    <p>Цена: {price}</p>',
+                                        '    <p><span>Метро:</span> {metro}</p>',
+                                        '    <p><span>Адрес:</span> {address}</p>',
+                                        '    <p><span>Цена:</span> {price}</p>',
                                         '    <p>{description}</p>',
                                         '</div>'
                                     ],
@@ -341,6 +500,23 @@ Ext.define('MyApp.view.MyViewport', {
         });
 
         me.callParent(arguments);
+    },
+
+    onMultisliderChange: function(slider, newValue, thumb, eOpts) {
+
+        var target = null;
+
+        if (thumb.index === 0) {
+            target = 'PriceOt';
+        }
+
+        if (thumb.index === 1) {
+            target = 'PriceDo';
+        }
+
+        if (target) {
+            Ext.getCmp(target).setValue(newValue);
+        }
     },
 
     onGridpanelSelectionChange: function(model, selected, eOpts) {

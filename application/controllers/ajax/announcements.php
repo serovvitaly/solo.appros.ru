@@ -21,13 +21,16 @@ class Ajax_Announcements_Controller extends Ajax_Controller
         if (count($data) > 0) {
             foreach ($data AS $row) {
                 $rows[] = array(
-                    'id'    => $row->uid,
-                    'title' => $row->atitle,
-                    'date'  => $row->time_added,
-                    'price' => $row->price,
-                    'link'  => 'http://avito.ru' . $row->ahref,
+                    'id'      => $row->uid,
+                    'title'   => $row->atitle,
+                    'date'    => $row->time_added,
+                    'price'   => $row->price,
+                    'link'    => 'http://avito.ru' . $row->ahref,
                     'description'  => $row->description,
-                    'type'  => $row->type,
+                    'type'    => $row->type,
+                    'metro'   => $row->metro,
+                    'address' => $row->address,
+                    'imgs'    => json_decode($row->imgs)
                 );
             }
         }
@@ -36,6 +39,30 @@ class Ajax_Announcements_Controller extends Ajax_Controller
         
         $this->success = true;
         $this->total   = $totla;
+        
+    }
+    
+    
+    public function action_filters()
+    {   
+        
+        $data  = UsetFilter::where('user_id', '=', 2)->order_by('name', 'asc')->get();
+        
+        $items = array();
+        if (count($data) > 0) {
+            foreach ($data AS $item) {
+                $items[] = array(
+                    'id'   => $item->id,
+                    'text' => $item->name,
+                    'name' => $item->name,
+                    'leaf' => true
+                );
+            }
+        }
+        
+        $this->items = $items;
+        
+        $this->success = true;
         
     }
     
