@@ -13,7 +13,7 @@
  * Do NOT hand edit this file.
  */
 
-Ext.define('MyApp.view.Viewport', {
-    extend: 'MyApp.view.MyViewport',
+Ext.define('SOLO.view.Viewport', {
+    extend: 'SOLO.view.MyViewport',
     renderTo: Ext.getBody()
 });

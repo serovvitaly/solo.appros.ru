@@ -30,7 +30,12 @@ class Ajax_Announcements_Controller extends Ajax_Controller
                     'type'    => $row->type,
                     'metro'   => $row->metro,
                     'address' => $row->address,
-                    'imgs'    => json_decode($row->imgs)
+                    'imgs'    => json_decode($row->imgs),
+                    'map'     => array(
+                        'zoom'      => $row->mapzoom,
+                        'latitude'  => $row->maplatitude,
+                        'longitude' => $row->maplongitude,
+                    )
                 );
             }
         }

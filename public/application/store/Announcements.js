@@ -13,14 +13,19 @@
  * Do NOT hand edit this file.
  */
 
-Ext.define('MyApp.store.Announcements', {
+Ext.define('SOLO.store.Announcements', {
     extend: 'Ext.data.Store',
+
+    requires: [
+        'SOLO.model.Announcement'
+    ],
 
     constructor: function(cfg) {
         var me = this;
         cfg = cfg || {};
         me.callParent([Ext.apply({
             autoLoad: true,
+            model: 'SOLO.model.Announcement',
             storeId: 'MyJsonStore',
             pageSize: 50,
             proxy: {
@@ -30,40 +35,7 @@ Ext.define('MyApp.store.Announcements', {
                     type: 'json',
                     root: 'rows'
                 }
-            },
-            fields: [
-                {
-                    name: 'id'
-                },
-                {
-                    name: 'title'
-                },
-                {
-                    name: 'date'
-                },
-                {
-                    name: 'price',
-                    type: 'float'
-                },
-                {
-                    name: 'description'
-                },
-                {
-                    name: 'link'
-                },
-                {
-                    name: 'type'
-                },
-                {
-                    name: 'metro'
-                },
-                {
-                    name: 'address'
-                },
-                {
-                    name: 'imgs'
-                }
-            ]
+            }
         }, cfg)]);
     }
 });

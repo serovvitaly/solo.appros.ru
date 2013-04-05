@@ -13,7 +13,7 @@
  * Do NOT hand edit this file.
  */
 
-Ext.define('MyApp.view.MyViewport', {
+Ext.define('SOLO.view.MyViewport', {
     extend: 'Ext.container.Viewport',
 
     layout: {
@@ -42,8 +42,12 @@ Ext.define('MyApp.view.MyViewport', {
                     maxWidth: 350,
                     minWidth: 200,
                     width: 300,
+                    autoScroll: true,
                     layout: {
                         type: 'border'
+                    },
+                    bodyStyle: {
+                        background: 'none'
                     },
                     collapsible: true,
                     header: false,
@@ -303,7 +307,7 @@ Ext.define('MyApp.view.MyViewport', {
                         {
                             xtype: 'panel',
                             region: 'center',
-                            margin: '1 0 0',
+                            margin: '3 0 0',
                             layout: {
                                 type: 'fit'
                             },
@@ -400,6 +404,8 @@ Ext.define('MyApp.view.MyViewport', {
                                         {
                                             xtype: 'gridcolumn',
                                             renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+                                                if (!value) return;
+
                                                 var els = value.split('.');
 
 
@@ -475,10 +481,17 @@ Ext.define('MyApp.view.MyViewport', {
                                         '<div>',
                                         '    <strong>{title}</strong>',
                                         '    <p><a target="_balnk" href="{link}">Источник</a></p>',
-                                        '    <p><span>Метро:</span> {metro}</p>',
-                                        '    <p><span>Адрес:</span> {address}</p>',
-                                        '    <p><span>Цена:</span> {price}</p>',
-                                        '    <p>{description}</p>',
+                                        '    <p><a style="color: red; font-weight: bold;" href="#" onclick="return showMap({id})">Показать на карте</a></p>',
+                                        '    <p><span style="color: gray">Метро:</span> {metro}</p>',
+                                        '    <p><span style="color: gray">Адрес:</span> {address}</p>',
+                                        '    <p><span style="color: gray">Цена:</span> {price}</p>',
+                                        '    <div style="margin: 0 -10px; padding: 10px; background: #F3F3F3;">{description}</div>',
+                                        '</div>',
+                                        '',
+                                        '<div style="margin: 20px 0">',
+                                        '    <tpl for="images">',
+                                        '        <a href="{big}" target="_blank" onclick="return showBigImage({parent.id},\'{big}\');"><img src="{small}" alt=""></a>',
+                                        '    </tpl>',
                                         '</div>'
                                     ],
                                     width: 300,
@@ -492,7 +505,68 @@ Ext.define('MyApp.view.MyViewport', {
                         },
                         {
                             xtype: 'panel',
+                            html: '<h1 style="text-align:center">Здесь скоро будет карта</h1>',
                             title: 'Общая карта'
+                        },
+                        {
+                            xtype: 'panel',
+                            layout: {
+                                type: 'fit'
+                            },
+                            title: 'Замечания и пожелания',
+                            items: [
+                                {
+                                    xtype: 'gridpanel',
+                                    border: false,
+                                    title: '',
+                                    store: 'Messages',
+                                    columns: [
+                                        {
+                                            xtype: 'gridcolumn',
+                                            dataIndex: 'string',
+                                            text: 'String'
+                                        },
+                                        {
+                                            xtype: 'numbercolumn',
+                                            dataIndex: 'number',
+                                            text: 'Number'
+                                        },
+                                        {
+                                            xtype: 'datecolumn',
+                                            dataIndex: 'date',
+                                            text: 'Date'
+                                        },
+                                        {
+                                            xtype: 'booleancolumn',
+                                            dataIndex: 'bool',
+                                            text: 'Boolean'
+                                        }
+                                    ],
+                                    dockedItems: [
+                                        {
+                                            xtype: 'toolbar',
+                                            dock: 'top',
+                                            defaults: {
+                                                scale: 'medium'
+                                            },
+                                            items: [
+                                                {
+                                                    xtype: 'button',
+                                                    text: 'Неисправность'
+                                                },
+                                                {
+                                                    xtype: 'button',
+                                                    text: 'Замечание'
+                                                },
+                                                {
+                                                    xtype: 'button',
+                                                    text: 'Пожелание'
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 }
@@ -526,6 +600,19 @@ Ext.define('MyApp.view.MyViewport', {
         }
 
         var data = selected[0].data;
+
+        var imgs = [];
+        if (data.imgs && data.imgs.length > 0) {
+            for (iter = 0; iter <= data.imgs.length; iter++) {
+                if (data.imgs[iter]){
+                    imgs.push({
+                        big: data.imgs[iter],
+                        small: data.imgs[iter].replace('640x480', '80x60')
+                    });
+                }
+            }  
+        }
+        data.images = imgs;
 
         var content_box = Ext.getCmp('FullContent');
 

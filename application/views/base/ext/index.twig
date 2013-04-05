@@ -9,6 +9,121 @@
     <script type="text/javascript" src="/ext/locale/ext-lang-ru.js"></script>
     
     <script type="text/javascript" src="app.js"></script>
+    
+    <script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru-RU"></script>
+    
+    <script>
+       
+        function showMap(item_id){
+            
+            var item =  Ext.getStore('Announcements').getById(item_id).data;
+            
+            var map = item.map ? item.map : null;
+            
+            if (!map || map.zoom <= 0 || map.latitude <= 0 || map.longitude <= 0) {
+                Ext.Msg.alert('Карта для объявления №' + item_id, 'Координаты не заданы, невозможно отобразить карту.');
+                
+                return false;
+            }
+            
+            var win_id = 'win_map_' + item_id;
+            
+            var ymap_id = 'sm_ymap_' + item_id;
+            
+            if (!Ext.getCmp(win_id)) {
+                Ext.create('SOLO.window.WindowMap', {
+                    id: win_id,
+                    title: 'Карта для объявления №' + item_id,
+                    html: '<div style="width:700px; height:500px" id="'+ymap_id+'"></div>'
+                }).show();    
+            }
+            
+            var myMap = new ymaps.Map(ymap_id, {
+                center: [map.latitude, map.longitude],
+                zoom: map.zoom
+            });
+            
+            myMap.controls
+                .add('zoomControl', { left: 5, top: 5 })
+                .add('typeSelector')
+                .add('mapTools', { left: 35, top: 5 }
+            );
+            
+            var myPlacemark1 = new ymaps.Placemark([map.latitude, map.longitude], {
+                //iconContent: '1',
+                balloonContent: item.address,
+                //hintContent: 'Стандартный значок метки'
+            }, {
+                preset: 'twirl#violetIcon'
+            });
+            
+            myMap.geoObjects.add(myPlacemark1);
+            
+            return false;
+        }
+       
+        function showBigImage(item_id, img, images){ 
+        
+            var win_id = 'win_bim_' + item_id;
+            
+            if (Ext.getCmp(win_id)) {
+                Ext.getCmp(win_id).update('<img src="'+img+'" alt="">');
+                Ext.getCmp(win_id).show();
+            } else {
+                Ext.create('SOLO.window.WindowBigImage', {
+                    id: win_id,
+                    title: 'Фото для объявления №' + item_id,
+                    html: '<img src="'+img+'" alt="">'
+                }).show();    
+            }
+            
+            return false;
+        }
+        
+        Ext.onReady(function(){
+            
+            SOLO.app.REMOTING_API = {
+                url:"php\/router.php",
+                type:"remoting",
+                actions:{
+                    TestAction:[
+                        {"name":"doEcho","len":1},
+                        {"name":"multiply","len":1},
+                        {"name":"getTree","len":1},
+                        {"name":"getGrid","len":1},
+                        {"name":"showDetails","params":["firstName","lastName","age"]}
+                    ],
+                    Profile:[
+                        {"name":"getBasicInfo","len":2},
+                        {"name":"getPhoneInfo","len":1},
+                        {"name":"getLocationInfo","len":1},
+                        {"name":"updateBasicInfo","len":0,"formHandler":true}
+                    ]
+                }
+            };
+            
+           /* Ext.direct.Manager.addProvider(Ext.app.REMOTING_API, {
+                type:'polling',
+                url: 'php/poll.php',
+            });*/
+            
+            Ext.define('SOLO.window.WindowMap', {
+                extend: 'Ext.window.Window',
+                //width: 640,
+                //height: 480,
+                constrain: true,
+                resizable: false
+            });
+            
+            Ext.define('SOLO.window.WindowBigImage', {
+                extend: 'Ext.window.Window',
+                width: 640,
+                height: 480,
+                constrain: true,
+                bodyStyle: 'background:#000; text-align:center;'
+            });
+        });
+    </script>
 </head>
 <body></body>
 </html>
