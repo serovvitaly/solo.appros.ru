@@ -2,8 +2,15 @@
 
 abstract class Ajax_Controller extends Controller
 {    
-    protected $_output  = array(); 
+    protected $_output  = array();
     
+    protected $USER = NULL; 
+    
+    
+    public function before()
+    {
+        $this->USER = Auth::user();
+    }
 
     
     public function __set($name, $value)

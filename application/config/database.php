@@ -42,7 +42,7 @@ return array(
 	|
 	*/
 
-	'default' => 'pgsql',
+	'default' => 'mysql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -69,12 +69,12 @@ return array(
 
 		'mysql' => array(
 			'driver'   => 'mysql',
-			'host'     => '127.0.0.1',
-			'database' => 'database',
-			'username' => 'root',
-			'password' => '',
+			'host'     => '62.109.8.132',
+			'database' => 'solo',
+			'username' => 'solo',
+			'password' => 'zRhfYpVO',
 			'charset'  => 'utf8',
-			'prefix'   => '',
+			'prefix'   => 'som_',
 		),
 
 		'pgsql' => array(

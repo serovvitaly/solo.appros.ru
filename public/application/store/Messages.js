@@ -28,9 +28,11 @@ Ext.define('SOLO.store.Messages', {
             model: 'SOLO.model.Message',
             storeId: 'MyDirectStore',
             proxy: {
-                type: 'direct',
+                type: 'ajax',
+                url: '/ajax/messages/list',
                 reader: {
-                    type: 'json'
+                    type: 'json',
+                    root: 'rows'
                 }
             }
         }, cfg)]);

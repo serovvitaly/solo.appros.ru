@@ -107,6 +107,13 @@
                 url: 'php/poll.php',
             });*/
             
+            Ext.direct.Manager.addProvider({
+                type:'polling',
+                url: '/ajax/provider/pull',
+                interval: 10000,
+                id: 'pollB-provider'
+            });
+            
             Ext.define('SOLO.window.WindowMap', {
                 extend: 'Ext.window.Window',
                 //width: 640,

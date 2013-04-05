@@ -16,6 +16,10 @@
 Ext.define('SOLO.view.MyViewport', {
     extend: 'Ext.container.Viewport',
 
+    requires: [
+        'SOLO.view.AdvGridPagerBase'
+    ],
+
     layout: {
         type: 'border'
     },
@@ -439,38 +443,22 @@ Ext.define('SOLO.view.MyViewport', {
                                             text: 'Цена'
                                         }
                                     ],
-                                    dockedItems: [
-                                        {
-                                            xtype: 'pagingtoolbar',
-                                            dock: 'bottom',
-                                            loader: {
-                                                limit: 100
-                                            },
-                                            width: 360,
-                                            displayInfo: true,
-                                            store: 'Announcements',
-                                            items: [
-                                                {
-                                                    xtype: 'combobox',
-                                                    width: 50,
-                                                    fieldLabel: '',
-                                                    store: [
-                                                        25,
-                                                        50,
-                                                        100,
-                                                        200,
-                                                        500
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    ],
                                     listeners: {
                                         selectionchange: {
                                             fn: me.onGridpanelSelectionChange,
                                             scope: me
                                         }
-                                    }
+                                    },
+                                    dockedItems: [
+                                        {
+                                            xtype: 'mypagingtoolbar',
+                                            dock: 'bottom'
+                                        },
+                                        {
+                                            xtype: 'mypagingtoolbar',
+                                            dock: 'top'
+                                        }
+                                    ]
                                 },
                                 {
                                     xtype: 'panel',
@@ -523,23 +511,18 @@ Ext.define('SOLO.view.MyViewport', {
                                     columns: [
                                         {
                                             xtype: 'gridcolumn',
-                                            dataIndex: 'string',
-                                            text: 'String'
-                                        },
-                                        {
-                                            xtype: 'numbercolumn',
-                                            dataIndex: 'number',
-                                            text: 'Number'
+                                            renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+                                                return Ext.String.format('<div class="message-{0}"><strong>{1}</strong><br/><span>{0}</span></div><div style="padding-top:5px">{2}</div>', record.get('type'), value, record.get('text'));
+                                            },
+                                            dataIndex: 'title',
+                                            text: 'Сообщение',
+                                            flex: 1
                                         },
                                         {
                                             xtype: 'datecolumn',
-                                            dataIndex: 'date',
-                                            text: 'Date'
-                                        },
-                                        {
-                                            xtype: 'booleancolumn',
-                                            dataIndex: 'bool',
-                                            text: 'Boolean'
+                                            dataIndex: 'created_at',
+                                            text: 'Дата',
+                                            format: 'd.m.Y'
                                         }
                                     ],
                                     dockedItems: [
@@ -561,6 +544,11 @@ Ext.define('SOLO.view.MyViewport', {
                                                 {
                                                     xtype: 'button',
                                                     text: 'Пожелание'
+                                                },
+                                                {
+                                                    xtype: 'pagingtoolbar',
+                                                    displayInfo: true,
+                                                    store: 'Messages'
                                                 }
                                             ]
                                         }

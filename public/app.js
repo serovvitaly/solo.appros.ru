@@ -30,7 +30,8 @@ Ext.application({
         'Messages'
     ],
     views: [
-        'MyViewport'
+        'MyViewport',
+        'AdvGridPagerBase'
     ],
     appFolder: 'application',
     autoCreateViewport: true,

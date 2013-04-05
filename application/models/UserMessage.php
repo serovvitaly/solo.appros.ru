@@ -1,7 +1,8 @@
 <?php
 
-class UsetMessage extends Eloquent
+class UserMessage extends Eloquent
 {
-    public static $table = 'solo_user_messages';
+    public static $table = 'user_messages';
     
+    public static $connection = 'mysql';    
 }

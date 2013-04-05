@@ -2,6 +2,8 @@
 
 class Advert extends Eloquent
 {
+    public static $connection = 'pgsql';
+    
     public static $table = 'spider_avito_store1';
     
     public function metro()

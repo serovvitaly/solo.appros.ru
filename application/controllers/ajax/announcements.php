@@ -50,7 +50,7 @@ class Ajax_Announcements_Controller extends Ajax_Controller
     
     public function action_filters()
     {   
-        
+        return;
         $data  = UsetFilter::where('user_id', '=', 2)->order_by('name', 'asc')->get();
         
         $items = array();
