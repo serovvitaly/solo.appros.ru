@@ -4,6 +4,8 @@ class Base_Controller extends Controller {
 
     public $layout = 'base.column1';
     
+    protected $USER = NULL;
+    
 	/**
 	 * Catch-all method for requests that can't be matched.
 	 *
@@ -15,6 +17,15 @@ class Base_Controller extends Controller {
 	{
 		return Response::error('404');
 	}
+    
+    
+    public function before()
+    {
+        parent::before();
+        
+        $this->USER = Auth::user();
+    }
+    
     
     public function after($response)
     {        

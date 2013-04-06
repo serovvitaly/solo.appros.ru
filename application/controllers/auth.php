@@ -2,16 +2,36 @@
 
 class Auth_Controller extends Controller
 {
+    protected $_is_post = false;
+    
+    protected $_output  = array();
+    
     protected $_rules = array(
-        'email'    => 'required|email|unique:users',
+        'email'    => 'required|email',
         'password' => 'required|max:16|min:6',
     );
+    
+    
+    public function before()
+    {
+        if (Request::method() == 'POST') {
+            $this->_is_post = true;
+        }
+    }
+    
+    
+    public function after($response)
+    {
+        if ($this->_is_post === true) {
+            echo Response::json( $this->_output );
+            return;
+        }
+    }
+    
     
     public function action_login()
     {
         $input = Input::all();
-        
-        $this->_rules['email'] = 'required|email';
         
         $validation = Validator::make($input, $this->_rules);
 
@@ -19,15 +39,20 @@ class Auth_Controller extends Controller
         
         if ($validation->fails())
         {
-            $messages = $validation->errors->messages;
+            $this->_output['success'] = false;
+            $this->_output['errors']  = $validation->errors->messages;
         }
         elseif (Auth::attempt(array('username' => $input['email'], 'password' => $input['password'])))
         {            
-            return Redirect::to('user/profile');
+            $this->_output['success'] = true;
+            $this->_output['msg']     = 'login_ok';
+        } else {
+            $this->_output['success'] = true;
+            $this->_output['errors']  = array('all' => 'Неверный логин или пароль.');
         }
         
         
-        return View::make('base.auth.login', array('messages' => $messages));
+        //return View::make('base.auth.login', array('messages' => $messages));
     }                                      
     
     
@@ -36,13 +61,16 @@ class Auth_Controller extends Controller
     {
         $input = Input::all();
         
+        $this->_rules['email'] .= '|unique:users';
+        
         $validation = Validator::make($input, $this->_rules);
 
         $messages = array();
         
         if ($validation->fails())
         {
-            $messages = $validation->errors->messages;
+            $this->_output['success'] = false;
+            $this->_output['errors']  = $validation->errors->messages;
         }
         else
         {            
@@ -52,9 +80,18 @@ class Auth_Controller extends Controller
             $user->password = Hash::make($input['password']);
             
             $user->save();
+            
+            $this->_output['success'] = true;
+            $this->_output['result']  = 'registration_ok';
         }
         
         
-        return View::make('base.auth.registration', array('messages' => $messages));
+        //return View::make('base.auth.registration', array('messages' => $messages));
+    }
+    
+    
+    public function action_logout()
+    {
+        Auth::logout();
     }
 }

@@ -27,11 +27,14 @@ Ext.application({
     stores: [
         'Announcements',
         'FiltersStore',
-        'Messages'
+        'Messages',
+        'MessageTypes'
     ],
     views: [
         'MyViewport',
-        'AdvGridPagerBase'
+        'AdvGridPagerBase',
+        'SoloMessageBox',
+        'AuthWindow'
     ],
     appFolder: 'application',
     autoCreateViewport: true,

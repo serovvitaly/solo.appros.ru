@@ -43,8 +43,6 @@ Ext.define('SOLO.view.MyViewport', {
                     split: true,
                     splitterResize: false,
                     border: false,
-                    maxWidth: 350,
-                    minWidth: 200,
                     width: 300,
                     autoScroll: true,
                     layout: {
@@ -535,6 +533,9 @@ Ext.define('SOLO.view.MyViewport', {
                                             items: [
                                                 {
                                                     xtype: 'button',
+                                                    handler: function(button, event) {
+                                                        console.log(Ext.getCmp('SoloMessageBox'));
+                                                    },
                                                     text: 'Неисправность'
                                                 },
                                                 {
@@ -547,6 +548,7 @@ Ext.define('SOLO.view.MyViewport', {
                                                 },
                                                 {
                                                     xtype: 'pagingtoolbar',
+                                                    border: false,
                                                     displayInfo: true,
                                                     store: 'Messages'
                                                 }

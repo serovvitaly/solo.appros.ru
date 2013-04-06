@@ -33,8 +33,16 @@ class Home_Controller extends Base_Controller {
     public $layout = 'base.empty';
     
 	public function action_index()
-	{
-		$this->layout->content = View::make('base/ext/index');
+	{   
+        $user = 'null';
+        
+        if ($this->USER) {
+            $user = json_encode( array(
+                'email' => $this->USER->email
+            ));
+        }
+         
+		$this->layout->content = View::make('base/ext/index', array('user' => $user));
 	}
 
 }

@@ -21,6 +21,16 @@ abstract class Ajax_Controller extends Controller
     
     public function after($response)
     {
+        if (!$this->USER) {
+            
+            echo Response::json( array(
+                'success' => false,
+                'error' => 'Access denied'
+            ) );
+            
+            return;
+        }
+        
         echo Response::json( $this->_output );
     }
     
