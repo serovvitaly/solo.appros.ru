@@ -35,7 +35,8 @@ Ext.define('SOLO.view.MyViewport', {
                 {
                     xtype: 'container',
                     region: 'north',
-                    height: 50
+                    height: 50,
+                    html: '<img src="/bundles/solo/img/logo.png" alt="realtyAnalitik">'
                 },
                 {
                     xtype: 'panel',
