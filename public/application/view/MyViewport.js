@@ -500,60 +500,110 @@ Ext.define('SOLO.view.MyViewport', {
                             layout: {
                                 type: 'fit'
                             },
-                            title: 'Замечания и пожелания',
-                            items: [
+                            title: 'Обратная связь',
+                            dockedItems: [
                                 {
-                                    xtype: 'gridpanel',
-                                    border: false,
-                                    title: '',
-                                    store: 'Messages',
-                                    columns: [
+                                    xtype: 'toolbar',
+                                    dock: 'top',
+                                    items: [
                                         {
-                                            xtype: 'gridcolumn',
-                                            renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
-                                                return Ext.String.format('<div class="message-{0}"><strong>{1}</strong><br/><span>{0}</span></div><div style="padding-top:5px">{2}</div>', record.get('type'), value, record.get('text'));
-                                            },
-                                            dataIndex: 'title',
-                                            text: 'Сообщение',
-                                            flex: 1
-                                        },
-                                        {
-                                            xtype: 'datecolumn',
-                                            dataIndex: 'created_at',
-                                            text: 'Дата',
-                                            format: 'd.m.Y'
-                                        }
-                                    ],
-                                    dockedItems: [
-                                        {
-                                            xtype: 'toolbar',
-                                            dock: 'top',
-                                            defaults: {
-                                                scale: 'medium'
-                                            },
+                                            xtype: 'buttongroup',
+                                            title: '',
+                                            columns: 2,
                                             items: [
                                                 {
                                                     xtype: 'button',
                                                     handler: function(button, event) {
                                                         console.log(Ext.getCmp('SoloMessageBox'));
                                                     },
-                                                    text: 'Неисправность'
-                                                },
-                                                {
-                                                    xtype: 'button',
-                                                    text: 'Замечание'
-                                                },
-                                                {
-                                                    xtype: 'button',
-                                                    text: 'Пожелание'
-                                                },
-                                                {
-                                                    xtype: 'pagingtoolbar',
-                                                    border: false,
-                                                    displayInfo: true,
-                                                    store: 'Messages'
+                                                    width: 140,
+                                                    scale: 'medium',
+                                                    text: 'Новое сообщение'
                                                 }
                                             ]
+                                        },
+                                        {
+                                            xtype: 'pagingtoolbar',
+                                            border: false,
+                                            displayInfo: true,
+                                            store: 'Messages'
+                                        }
+                                    ]
+                                }
+                            ],
+                            items: [
+                                {
+                                    xtype: 'container',
+                                    width: 150,
+                                    layout: {
+                                        padding: 1,
+                                        type: 'border'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'panel',
+                                            region: 'east',
+                                            split: true,
+                                            maxWidth: 500,
+                                            minWidth: 300,
+                                            width: 400,
+                                            collapsible: true,
+                                            header: false,
+                                            title: 'Сообщение',
+                                            items: [
+                                                {
+                                                    xtype: 'form',
+                                                    border: false,
+                                                    id: 'FullMessageForm',
+                                                    bodyPadding: 10,
+                                                    title: '',
+                                                    items: [
+                                                        {
+                                                            xtype: 'displayfield',
+                                                            anchor: '100%',
+                                                            fieldLabel: '',
+                                                            name: 'title',
+                                                            fieldStyle: 'font-weight: bold; line-height: 16px;'
+                                                        },
+                                                        {
+                                                            xtype: 'displayfield',
+                                                            anchor: '100%',
+                                                            fieldLabel: '',
+                                                            name: 'text',
+                                                            fieldStyle: 'line-height: 16px;'
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'gridpanel',
+                                            region: 'center',
+                                            title: '',
+                                            store: 'Messages',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+                                                        return Ext.String.format('<div class="message-{0}"><strong>{1}</strong><br/><span>{0}</span></div><div style="padding-top:5px">{2}</div>', record.get('type'), value, record.get('text'));
+                                                    },
+                                                    dataIndex: 'title',
+                                                    text: 'Сообщение',
+                                                    flex: 1
+                                                },
+                                                {
+                                                    xtype: 'datecolumn',
+                                                    dataIndex: 'created_at',
+                                                    text: 'Дата',
+                                                    format: 'd.m.Y'
+                                                }
+                                            ],
+                                            listeners: {
+                                                selectionchange: {
+                                                    fn: me.onGridpanelSelectionChange1,
+                                                    scope: me
+                                                }
+                                            }
                                         }
                                     ]
                                 }
@@ -608,6 +658,17 @@ Ext.define('SOLO.view.MyViewport', {
         var content_box = Ext.getCmp('FullContent');
 
         content_box.update(data);
+    },
+
+    onGridpanelSelectionChange1: function(model, selected, eOpts) {
+
+        if (selected.length < 1) {
+            return;   
+        }
+
+        var data = selected[0];
+
+        Ext.getCmp('FullMessageForm').getForm().loadRecord(data);
     }
 
 });
