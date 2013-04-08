@@ -22,4 +22,37 @@ class Ajax_Messages_Controller extends Ajax_Controller
         
         $this->success = true;
     }
+    
+    
+    public function action_send()
+    {
+        if (!$this->USER) {
+            return;
+        }
+        
+        $input = Input::get();
+        
+        $rules = array(
+            'title' => 'required',
+            'text'  => 'required',
+        );
+        
+        $validator = Validator::make($input, $rules);
+        
+        if ($validator->fails()) {
+            $this->success = false;
+            $this->errors  = $validation->errors->messages;
+        }
+        else {
+            $message = new UserMessage;
+            
+            $message->title = $input['title'];
+            $message->text  = $input['text'];
+            
+            $message->save();
+            
+            $this->success = true;
+            $this->msg     = 'send_ok';
+        }
+    }
 }

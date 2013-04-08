@@ -33,8 +33,8 @@ Ext.application({
     views: [
         'MyViewport',
         'AdvGridPagerBase',
-        'SoloMessageBox',
-        'AuthWindow'
+        'AuthWindow',
+        'MessageWindow'
     ],
     appFolder: 'application',
     autoCreateViewport: true,

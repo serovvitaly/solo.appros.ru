@@ -68,6 +68,9 @@ Ext.define('SOLO.view.MyViewport', {
                                     items: [
                                         {
                                             xtype: 'button',
+                                            handler: function(button, event) {
+                                                Ext.getCmp('AnnouncementsGrid').getStore().filter('price', '0');
+                                            },
                                             text: 'Применить'
                                         },
                                         {
@@ -353,6 +356,7 @@ Ext.define('SOLO.view.MyViewport', {
                                 {
                                     xtype: 'gridpanel',
                                     region: 'center',
+                                    id: 'AnnouncementsGrid',
                                     title: '',
                                     store: 'Announcements',
                                     columns: [
@@ -514,7 +518,11 @@ Ext.define('SOLO.view.MyViewport', {
                                                 {
                                                     xtype: 'button',
                                                     handler: function(button, event) {
-                                                        console.log(Ext.getCmp('SoloMessageBox'));
+                                                        if (!Ext.getCmp('MessageWindow')) {
+                                                            Ext.create('SOLO.view.MessageWindow');
+                                                        }
+
+                                                        Ext.getCmp('MessageWindow').show();
                                                     },
                                                     width: 140,
                                                     scale: 'medium',
@@ -579,6 +587,7 @@ Ext.define('SOLO.view.MyViewport', {
                                         {
                                             xtype: 'gridpanel',
                                             region: 'center',
+                                            id: 'MessagesGrid',
                                             title: '',
                                             store: 'Messages',
                                             columns: [
